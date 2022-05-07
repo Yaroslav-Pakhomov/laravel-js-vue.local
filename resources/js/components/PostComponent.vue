@@ -119,16 +119,16 @@
                 <br>
                 <br>
             </div>
-            <div class="col-md-8 text-center">
-                <button class="col-md-8 text-center" @click="sayHello">Hello</button>
-                <br>
-                <br>
-            </div>
-            <div class="col-md-8 text-center">
-                <button class="col-md-8 text-center" @click="sayHi">Hi</button>
-                <br>
-                <br>
-            </div>
+<!--            <div class="col-md-8 text-center">-->
+<!--                <button class="col-md-8 text-center" @click="sayHello">Hello</button>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--            </div>-->
+<!--            <div class="col-md-8 text-center">-->
+<!--                <button class="col-md-8 text-center" @click="sayHi">Hi</button>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--            </div>-->
             <!--            <div class="col-md-8 text-center">Job: {{ ivanJob }}</div>-->
             <SinglePostComponent></SinglePostComponent>
         </div>
@@ -159,48 +159,65 @@ export default {
 
     data() {
         return {
-            persons: [
-                {
-                    id: 1,
-                    name: 'Ivan',
-                    age: 23,
-                    job: 'coach',
-                },
-                {
-                    id: 2,
-                    name: 'Elena',
-                    age: 17,
-                    job: 'free',
-                },
-                {
-                    id: 3,
-                    name: 'Semen',
-                    age: 20,
-                    job: 'seller',
-                },
-                {
-                    id: 4,
-                    name: 'Katusha',
-                    age: 34,
-                    job: 'traveler',
-                },
-                {
-                    id: 5,
-                    name: 'Ola',
-                    age: 21,
-                    job: 'teacher',
-                },
-            ]
+            persons: null,
+            // persons: [
+            //     {
+            //         id: 1,
+            //         name: 'Ivan',
+            //         age: 23,
+            //         job: 'coach',
+            //     },
+            //     {
+            //         id: 2,
+            //         name: 'Elena',
+            //         age: 17,
+            //         job: 'free',
+            //     },
+            //     {
+            //         id: 3,
+            //         name: 'Semen',
+            //         age: 20,
+            //         job: 'seller',
+            //     },
+            //     {
+            //         id: 4,
+            //         name: 'Katusha',
+            //         age: 34,
+            //         job: 'traveler',
+            //     },
+            //     {
+            //         id: 5,
+            //         name: 'Ola',
+            //         age: 21,
+            //         job: 'teacher',
+            //     },
+            // ]
         }
     },
 
+    mounted() {
+        this.getPersons()
+    },
+
     methods: {
-        sayHello() {
-            console.log('Hello')
-        },
-        sayHi() {
-            console.log('Hi')
+        getPersons() {
+            axios.get('/persons')
+            .then(personRes => {
+                this.persons = personRes.data;
+            })
+            .catch(error => {
+
+            })
+            .finally({
+
+            })
         }
+        // sayHello() {
+        //     console.log('Hello')
+        // },
+        // sayHi() {
+        //     console.log('Hi')
+        // }
     },
 
     // computed: {
