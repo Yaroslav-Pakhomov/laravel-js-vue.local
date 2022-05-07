@@ -5416,9 +5416,226 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostComponent",
+  // data() {
+  //     return {
+  //         name: 'Иван',
+  //         age: 23,
+  //         boolean: false,
+  //         someNull: null,
+  //         array: [
+  //             [
+  //
+  //             ]
+  //         ],
+  //         someObj: {
+  //             personalName: 'Вася',
+  //         }
+  //     }
+  // },
+  data: function data() {
+    return {
+      persons: null // persons: [
+      //     {
+      //         id: 1,
+      //         name: 'Ivan',
+      //         age: 23,
+      //         job: 'coach',
+      //     },
+      //     {
+      //         id: 2,
+      //         name: 'Elena',
+      //         age: 17,
+      //         job: 'free',
+      //     },
+      //     {
+      //         id: 3,
+      //         name: 'Semen',
+      //         age: 20,
+      //         job: 'seller',
+      //     },
+      //     {
+      //         id: 4,
+      //         name: 'Katusha',
+      //         age: 34,
+      //         job: 'traveler',
+      //     },
+      //     {
+      //         id: 5,
+      //         name: 'Ola',
+      //         age: 21,
+      //         job: 'teacher',
+      //     },
+      // ]
+
+    };
+  },
+  mounted: function mounted() {
+    this.getPersons();
+  },
+  methods: {
+    getPersons: function getPersons() {
+      var _this = this;
+
+      axios.get('/persons').then(function (personRes) {
+        _this.persons = personRes.data;
+      })["catch"](function (error) {})["finally"]({});
+    } // sayHello() {
+    //     console.log('Hello')
+    // },
+    // sayHi() {
+    //     console.log('Hi')
+    // }
+
+  },
+  // computed: {
+  //     ivanJob() {
+  //         // return this.name + ' работает в магазине. Ему ' + this.age + ' года.'
+  //     }
+  // },
+  computed: {
+    personIDMoreThree: function personIDMoreThree() {
+      return this.persons.filter(function (person) {
+        return person.id > 3;
+      });
+    },
+    personIDLessThree: function personIDLessThree() {
+      return this.persons.filter(function (person) {
+        return person.id < 3;
+      });
+    },
+    personIDEquallyThree: function personIDEquallyThree() {
+      return this.persons.filter(function (person) {
+        return person.id === 3;
+      });
+    }
+  },
   components: {
     SinglePostComponent: _SinglePostComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -28241,10 +28458,6 @@ var render = function () {
       "div",
       { staticClass: "row justify-content-center" },
       [
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
         _c("div", { staticClass: "col-md-8 text-center" }, [
           _vm._v("Post Component"),
         ]),
@@ -28253,13 +28466,250 @@ var render = function () {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-8 text-center" }, [
+          _c("h6", [_vm._v("Все")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.persons, function (person) {
+                return _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(person.id)),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.age))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.job))]),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("h6", [_vm._v("Больше 20 лет")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.persons, function (person) {
+                return person.age > 20
+                  ? _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(person.id)),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(person.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(person.age))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(person.job))]),
+                    ])
+                  : _vm._e()
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("h6", [_vm._v("ID больше 3")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.personIDMoreThree, function (person) {
+                return _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(person.id)),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.age))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.job))]),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("h6", [_vm._v("ID меньше 3")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.personIDLessThree, function (person) {
+                return _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(person.id)),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.age))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.job))]),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("h6", [_vm._v("ID равно 3")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.personIDEquallyThree, function (person) {
+                return _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(person.id)),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.age))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(person.job))]),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+        ]),
+        _vm._v(" "),
         _c("SinglePostComponent"),
       ],
       1
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
