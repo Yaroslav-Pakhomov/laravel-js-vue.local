@@ -9,6 +9,7 @@
             <br>
             <!--            <div class="col-md-8 text-center">Name: {{ name }}</div>-->
             <div class="col-md-8 text-center">
+                <h6>Все</h6>
                 <table class="table">
                     <thead>
                     <tr>
@@ -27,11 +28,107 @@
                     </tr>
                     </tbody>
                 </table>
+                <br>
+                <br>
+                <br>
+                <h6>Больше 20 лет</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Job</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="person in persons" v-if="person.age > 20">
+                        <th scope="row">{{ person.id }}</th>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.job }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <br>
+                <h6>ID больше 3</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Job</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="person in personIDMoreThree">
+                        <th scope="row">{{ person.id }}</th>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.job }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <br>
+                <h6>ID меньше 3</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Job</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="person in personIDLessThree">
+                        <th scope="row">{{ person.id }}</th>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.job }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <br>
+                <h6>ID равно 3</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Job</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="person in personIDEquallyThree">
+                        <th scope="row">{{ person.id }}</th>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.job }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
             </div>
-            <br>
-            <br>
-            <button class="col-md-8 text-center" @click="sayHello">Hello</button>
-            <button class="col-md-8 text-center" @click="sayHi">Hi</button>
+            <div class="col-md-8 text-center">
+                <button class="col-md-8 text-center" @click="sayHello">Hello</button>
+                <br>
+                <br>
+            </div>
+            <div class="col-md-8 text-center">
+                <button class="col-md-8 text-center" @click="sayHi">Hi</button>
+                <br>
+                <br>
+            </div>
             <!--            <div class="col-md-8 text-center">Job: {{ ivanJob }}</div>-->
             <SinglePostComponent></SinglePostComponent>
         </div>
@@ -78,8 +175,20 @@ export default {
                 {
                     id: 3,
                     name: 'Semen',
-                    age: 25,
+                    age: 20,
                     job: 'seller',
+                },
+                {
+                    id: 4,
+                    name: 'Katusha',
+                    age: 34,
+                    job: 'traveler',
+                },
+                {
+                    id: 5,
+                    name: 'Ola',
+                    age: 21,
+                    job: 'teacher',
                 },
             ]
         }
@@ -99,6 +208,24 @@ export default {
     //         // return this.name + ' работает в магазине. Ему ' + this.age + ' года.'
     //     }
     // },
+
+    computed: {
+        personIDMoreThree() {
+            return this.persons.filter(function (person) {
+                return person.id > 3
+            })
+        },
+        personIDLessThree() {
+            return this.persons.filter(function (person) {
+                return person.id < 3
+            })
+        },
+        personIDEquallyThree() {
+            return this.persons.filter(function (person) {
+                return person.id === 3
+            })
+        },
+    },
 
     components: {
         SinglePostComponent
