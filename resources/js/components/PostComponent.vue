@@ -16,6 +16,9 @@
             <button class="col-md-8 text-center" @click="sayHi">Hi</button>
             <br>
             <br>
+            <div class="col-md-8 text-center">Job: {{ ivanJob }}</div>
+            <br>
+            <br>
             <br>
             <SinglePostComponent></SinglePostComponent>
         </div>
@@ -29,7 +32,7 @@ export default {
 
     data() {
         return {
-            name: 'Ivan',
+            name: 'Иван',
             age: 23,
             boolean: false,
             someNull: null,
@@ -39,7 +42,7 @@ export default {
                 ]
             ],
             someObj: {
-                personalName: 'Vasya',
+                personalName: 'Вася',
             }
         }
     },
@@ -50,6 +53,12 @@ export default {
         },
         sayHi() {
             console.log('Hi')
+        }
+    },
+
+    computed: {
+        ivanJob() {
+            return this.name + ' работает в магазине. Ему ' + this.age + ' года.'
         }
     },
 
