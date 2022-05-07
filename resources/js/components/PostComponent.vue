@@ -1,14 +1,26 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">11111</div>
+            <br>
+            <br>
+            <div class="col-md-8 text-center">Post Component</div>
+            <br>
+            <br>
+            <SinglePostComponent></SinglePostComponent>
         </div>
     </div>
 </template>
-
 <script>
+import SinglePostComponent from "./SinglePostComponent";
+
 export default {
-    name: "PostComponent"
+    name: "PostComponent",
+
+
+
+    components: {
+        SinglePostComponent
+    }
 }
 </script>
 
