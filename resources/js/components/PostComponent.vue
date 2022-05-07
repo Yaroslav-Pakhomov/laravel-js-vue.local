@@ -10,6 +10,12 @@
             <div class="col-md-8 text-center">Name: {{ name }}</div>
             <br>
             <br>
+            <button class="col-md-8 text-center" @click="sayHello">Hello</button>
+            <br>
+            <br>
+            <button class="col-md-8 text-center" @click="sayHi">Hi</button>
+            <br>
+            <br>
             <br>
             <SinglePostComponent></SinglePostComponent>
         </div>
@@ -35,6 +41,15 @@ export default {
             someObj: {
                 personalName: 'Vasya',
             }
+        }
+    },
+
+    methods: {
+        sayHello() {
+            console.log('Hello')
+        },
+        sayHi() {
+            console.log('Hi')
         }
     },
 
