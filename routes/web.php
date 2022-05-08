@@ -100,6 +100,4 @@ Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\Person\StoreController::class, 'index'])->name('home');
 
-Route::group(['namespace' => 'Person', 'prefix' => '/persons'], static function () {
-    Route::get('/', 'IndexController')->name('persons');
-});
+Route::get('/cadre', 'CadreController')->name('cadre');

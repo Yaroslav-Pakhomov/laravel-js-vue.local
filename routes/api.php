@@ -20,7 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request): mix
     return $request->user();
 });
 
-Route::group(['namespace' => 'Person', 'prefix' => 'people'], static function () {
-    Route::post('/', 'StoreController');
+Route::group(['namespace' => 'Person', 'prefix' => 'people', 'middleware' => 'throttle:6000,1'], static function () {
+    Route::get('/', 'IndexController');
+    Route::post('/store', 'StoreController');
 });
 
