@@ -98,5 +98,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\PersonController::class, 'index'])->name('home');
-Route::get('/persons', 'PersonController')->name('persons');
+Route::get('/home', [\App\Http\Controllers\Person\StoreController::class, 'index'])->name('home');
+
+Route::group(['namespace' => 'Person', 'prefix' => '/persons'], static function () {
+    Route::get('/', 'IndexController')->name('persons');
+});

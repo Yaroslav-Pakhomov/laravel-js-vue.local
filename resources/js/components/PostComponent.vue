@@ -119,23 +119,29 @@
                 <br>
                 <br>
             </div>
-<!--            <div class="col-md-8 text-center">-->
-<!--                <button class="col-md-8 text-center" @click="sayHello">Hello</button>-->
-<!--                <br>-->
-<!--                <br>-->
-<!--            </div>-->
-<!--            <div class="col-md-8 text-center">-->
-<!--                <button class="col-md-8 text-center" @click="sayHi">Hi</button>-->
-<!--                <br>-->
-<!--                <br>-->
-<!--            </div>-->
-            <!--            <div class="col-md-8 text-center">Job: {{ ivanJob }}</div>-->
+            <div class="col-md-6 text-center">
+                <button class="btn btn-danger col-md-8 text-center" @click="sayHello">Hello</button>
+                <br>
+                <br>
+            </div>
+            <div class="col-md-6 text-center">
+                <button class="btn btn-dark col-md-8 text-center" @click="sayHi">Hi</button>
+                <br>
+                <br>
+            </div>
+            <div class="col-md-8 text-center">Данные Ivan: {{ ivanJob }}</div>
+            <br>
+            <br>
             <SinglePostComponent></SinglePostComponent>
+            <br>
+            <br>
+            <CreateComponent></CreateComponent>
         </div>
     </div>
 </template>
 <script>
 import SinglePostComponent from "./SinglePostComponent";
+import CreateComponent from "./CreateComponent";
 
 export default {
     name: "PostComponent",
@@ -159,7 +165,10 @@ export default {
 
     data() {
         return {
-            persons: null,
+            name: 'Ivan',
+            age: '23',
+            job: 'seller',
+            persons: [],
             // persons: [
             //     {
             //         id: 1,
@@ -202,22 +211,19 @@ export default {
     methods: {
         getPersons() {
             axios.get('/persons')
-            .then(personRes => {
-                this.persons = personRes.data;
-            })
-            .catch(error => {
-
-            })
-            .finally({
-
-            })
+                .then(personRes => {
+                    this.persons = personRes.data;
+                })
+                .catch(error => {
+                })
+                .finally({})
+        },
+        sayHello() {
+            console.log('Hello')
+        },
+        sayHi() {
+            console.log('Hi')
         }
-        // sayHello() {
-        //     console.log('Hello')
-        // },
-        // sayHi() {
-        //     console.log('Hi')
-        // }
     },
 
     // computed: {
@@ -242,10 +248,14 @@ export default {
                 return person.id === 3
             })
         },
+        ivanJob() {
+            return this.name + ' работает в магазине. Ему ' + this.age + ' года. Он работает ' + this.job + '.'
+        },
     },
 
     components: {
-        SinglePostComponent
+        SinglePostComponent,
+        CreateComponent,
     }
 }
 </script>
