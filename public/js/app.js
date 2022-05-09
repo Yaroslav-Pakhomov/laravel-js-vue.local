@@ -5506,11 +5506,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "IndexComponent",
   data: function data() {
     return {
-      people: []
+      people: [],
+      editPersonID: null,
+      name: '',
+      age: null,
+      job: ''
     };
   },
   mounted: function mounted() {
@@ -5521,11 +5539,43 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/people/').then(function (response) {
-        console.log(response);
+        // console.log(response)
         _this.people = response.data;
       })["catch"](function (error) {
         console.log(error.response);
       });
+    },
+    updatePerson: function updatePerson(id) {
+      var _this2 = this;
+
+      this.editPersonID = null;
+      axios.patch("api/people/".concat(id), {
+        name: this.name,
+        age: this.age,
+        job: this.job
+      }).then(function (response) {
+        console.log(response);
+
+        _this2.getPeople();
+      });
+    },
+    deletePerson: function deletePerson(id) {
+      var _this3 = this;
+
+      axios["delete"]("api/people/".concat(id)).then(function (response) {
+        console.log(response);
+
+        _this3.getPeople();
+      });
+    },
+    changeEditPersonID: function changeEditPersonID(id, name, age, job) {
+      this.editPersonID = id;
+      this.name = name;
+      this.age = age;
+      this.job = job;
+    },
+    isEdit: function isEdit(id) {
+      return this.editPersonID === id;
     }
   },
   computed: {},
@@ -28801,7 +28851,7 @@ var render = function () {
               },
             },
           },
-          [_vm._v("\n                Добавить\n            ")]
+          [_vm._v("\n        Добавить\n      ")]
         ),
       ]),
     ]),
@@ -28884,18 +28934,175 @@ var render = function () {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.people, function (human) {
-          return _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(human.id))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(human.name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(human.age))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(human.job))]),
-          ])
-        }),
-        0
+        [
+          _vm._l(_vm.people, function (human) {
+            return [
+              _c("tr", { class: _vm.isEdit(human.id) ? "d-none" : "" }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(human.id)),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(human.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(human.age))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(human.job))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.changeEditPersonID(
+                            human.id,
+                            human.name,
+                            human.age,
+                            human.job
+                          )
+                        },
+                      },
+                    },
+                    [_vm._v("Редактировать")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.deletePerson(human.id)
+                        },
+                      },
+                    },
+                    [_vm._v("Удалить")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", { class: _vm.isEdit(human.id) ? "" : "d-none" }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(human.id)),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name,
+                        expression: "name",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.name },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.age,
+                        expression: "age",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.age },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.age = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.job,
+                        expression: "job",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.job },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.job = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.updatePerson(human.id)
+                        },
+                      },
+                    },
+                    [_vm._v("Обновить")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.deletePerson(human.id)
+                        },
+                      },
+                    },
+                    [_vm._v("Удалить")]
+                  ),
+                ]),
+              ]),
+            ]
+          }),
+        ],
+        2
       ),
     ]),
   ])
@@ -28914,6 +29121,10 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Возраст")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Должность")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Редактирование")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Удаление")]),
       ]),
     ])
   },
