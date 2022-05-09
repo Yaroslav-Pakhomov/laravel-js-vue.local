@@ -98,6 +98,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\Person\UpdateController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\Person\deleteController::class, 'index'])->name('home');
 
 Route::get('/cadre', 'CadreController')->name('cadre');

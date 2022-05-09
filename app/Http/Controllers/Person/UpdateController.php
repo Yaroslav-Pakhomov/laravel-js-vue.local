@@ -10,7 +10,7 @@ use App\Models\Person;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, Person $person)
+    public function __invoke(UpdateRequest $request, Person $person): bool
     {
         $data = $request->validated();
 

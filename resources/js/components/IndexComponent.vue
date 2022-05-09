@@ -7,7 +7,8 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Возраст</th>
                 <th scope="col">Должность</th>
-                <th scope="col">Действия</th>
+                <th scope="col">Редактирование</th>
+                <th scope="col">Удаление</th>
             </tr>
             </thead>
             <tbody>
@@ -17,8 +18,8 @@
                     <td>{{ human.name }}</td>
                     <td>{{ human.age }}</td>
                     <td>{{ human.job }}</td>
-                    <td><a href="#" @click.prevent="changeEditPersonID(human.id, human.name, human.age, human.job)"
-                           class="btn btn-success">Редактировать</a></td>
+                    <td><a href="#" @click.prevent="changeEditPersonID(human.id, human.name, human.age, human.job)" class="btn btn-success">Редактировать</a></td>
+                    <td><a href="#" @click.prevent="deletePerson(human.id)" class="btn btn-danger">Удалить</a></td>
                 </tr>
                 <tr :class="isEdit(human.id) ? '' : 'd-none'">
                     <th scope="row">{{ human.id }}</th>
@@ -26,6 +27,7 @@
                     <td><input type="number" v-model="age" class="form-control"></td>
                     <td><input type="text" v-model="job" class="form-control"></td>
                     <td><a href="#" @click.prevent="updatePerson(human.id)" class="btn btn-success">Обновить</a></td>
+                    <td><a href="#" @click.prevent="deletePerson(human.id)" class="btn btn-danger">Удалить</a></td>
                 </tr>
             </template>
             </tbody>
@@ -76,6 +78,14 @@ export default {
                 })
         },
 
+        deletePerson(id) {
+            axios.delete(`api/people/${id}`)
+                .then(response => {
+                    console.log(response);
+                    this.getPeople()
+                })
+        },
+
         changeEditPersonID(id, name, age, job) {
             this.editPersonID = id
             this.name = name
@@ -85,7 +95,8 @@ export default {
 
         isEdit(id) {
             return this.editPersonID === id
-        }
+        },
+
     },
 
     computed: {},
