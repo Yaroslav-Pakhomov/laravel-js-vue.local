@@ -7,13 +7,13 @@ namespace App\Http\Controllers\Person;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\UpdateRequest;
 use App\Models\Person;
-use Illuminate\Database\Eloquent\Collection;
 
-class StoreController extends Controller
+class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request): Collection
+    public function __invoke(UpdateRequest $request, Person $person)
     {
         $data = $request->validated();
-        return Person::create($data);
+
+        return $person->update($data);
     }
 }
