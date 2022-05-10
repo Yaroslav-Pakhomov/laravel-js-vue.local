@@ -41,22 +41,23 @@ export default {
     },
 
     mounted() {
-        this.$parent.$refs.index.indexLog();
+        // this.$parent.$refs.index.indexLog();
     },
 
     methods: {
         addPersons() {
             // console.log( this.name, this.age, this.job)
-            axios.post('/api/people/store', {
+            axios.post('/api/people', {
                 name: this.name,
                 age: this.age,
                 job: this.job,
             })
                 .then(personRes => {
+                    console.log(personRes)
                     this.name = null
                     this.age = null
                     this.job = null
-                    console.log(personRes.data);
+                    this.$parent.$refs.index.getPeople()
                     // this.persons = personRes.data;
                 })
                 .catch(error => {

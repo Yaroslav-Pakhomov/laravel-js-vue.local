@@ -211,7 +211,7 @@ export default {
 
     mounted() {
         this.getPersons()
-        this.$refs.index.indexLog();
+        // this.$refs.index.indexLog();
     },
 
     methods: {

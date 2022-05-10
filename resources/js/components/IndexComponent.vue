@@ -13,29 +13,17 @@
             </thead>
             <tbody>
             <template v-for="human in people">
-                <tr :class="isEdit(human.id) ? 'd-none' : ''">
-                    <th scope="row">{{ human.id }}</th>
-                    <td>{{ human.name }}</td>
-                    <td>{{ human.age }}</td>
-                    <td>{{ human.job }}</td>
-                    <td><a href="#" @click.prevent="changeEditPersonID(human.id, human.name, human.age, human.job)"
-                           class="btn btn-success">Редактировать</a></td>
-                    <td><a href="#" @click.prevent="deletePerson(human.id)" class="btn btn-danger">Удалить</a></td>
-                </tr>
-                <tr :class="isEdit(human.id) ? '' : 'd-none'">
-                    <th scope="row">{{ human.id }}</th>
-                    <td><input type="text" v-model="name" class="form-control"></td>
-                    <td><input type="number" v-model="age" class="form-control"></td>
-                    <td><input type="text" v-model="job" class="form-control"></td>
-                    <td><a href="#" @click.prevent="updatePerson(human.id)" class="btn btn-success">Обновить</a></td>
-                    <td><a href="#" @click.prevent="deletePerson(human.id)" class="btn btn-danger">Удалить</a></td>
-                </tr>
+                <ShowComponent :human="human" :ref="`show_${human.id}`"></ShowComponent>
+                <EditComponent :human="human" :ref="`edit_${human.id}`"></EditComponent>
             </template>
             </tbody>
         </table>
     </div>
 </template>
 <script>
+
+import EditComponent from "./EditComponent";
+import ShowComponent from "./ShowComponent";
 
 export default {
     name: "IndexComponent",
@@ -44,21 +32,18 @@ export default {
         return {
             people: [],
             editPersonID: null,
-            name: '',
-            age: null,
-            job: '',
         }
     },
 
     mounted() {
         this.getPeople()
-        this.$parent.parentLog();
-        this.$parent.$refs.create.$refs.somecomponent.indexSomeComponent();
+        // this.$parent.parentLog();
+        // this.$parent.$refs.create.$refs.somecomponent.indexSomeComponent();
     },
 
     methods: {
         getPeople() {
-            axios.get('api/people/')
+            axios.get('api/people')
                 .then(response => {
                     // console.log(response)
                     this.people = response.data
@@ -68,32 +53,13 @@ export default {
                 })
         },
 
-        updatePerson(id) {
-            this.editPersonID = null
-            axios.patch(`api/people/${id}`, {
-                name: this.name,
-                age: this.age,
-                job: this.job
-            })
-                .then(response => {
-                    console.log(response);
-                    this.getPeople()
-                })
-        },
-
         deletePerson(id) {
+            console.log(id);
             axios.delete(`api/people/${id}`)
                 .then(response => {
                     console.log(response);
                     this.getPeople()
                 })
-        },
-
-        changeEditPersonID(id, name, age, job) {
-            this.editPersonID = id
-            this.name = name
-            this.age = age
-            this.job = job
         },
 
         isEdit(id) {
@@ -108,7 +74,10 @@ export default {
 
     computed: {},
 
-    components: {}
+    components: {
+        EditComponent,
+        ShowComponent,
+    }
 }
 </script>
 

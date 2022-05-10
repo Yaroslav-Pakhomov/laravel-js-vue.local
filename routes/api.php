@@ -21,8 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request): mix
 });
 
 Route::group(['namespace' => 'Person', 'prefix' => 'people', 'middleware' => 'throttle:6000,1'], static function () {
+    Route::post('/', 'StoreController');
     Route::get('/', 'IndexController');
-    Route::post('/store', 'StoreController');
     Route::patch('/{person}', 'UpdateController');
     Route::delete('/{person}', 'DeleteController');
 });
