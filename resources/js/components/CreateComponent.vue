@@ -17,7 +17,7 @@
                 </button>
             </div>
         </div>
-        <SomeComponent ref="somecomponent"></SomeComponent>
+        <SomeComponent ref="somecomponent" :obj="obj"></SomeComponent>
     </div>
 </template>
 <script>
@@ -32,6 +32,11 @@ export default {
             name: null,
             age: null,
             job: null,
+            obj: {
+                color: "white",
+                number: "10",
+                isPublished: "true",
+            },
         }
     },
 
