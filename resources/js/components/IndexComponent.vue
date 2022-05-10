@@ -18,7 +18,8 @@
                     <td>{{ human.name }}</td>
                     <td>{{ human.age }}</td>
                     <td>{{ human.job }}</td>
-                    <td><a href="#" @click.prevent="changeEditPersonID(human.id, human.name, human.age, human.job)" class="btn btn-success">Редактировать</a></td>
+                    <td><a href="#" @click.prevent="changeEditPersonID(human.id, human.name, human.age, human.job)"
+                           class="btn btn-success">Редактировать</a></td>
                     <td><a href="#" @click.prevent="deletePerson(human.id)" class="btn btn-danger">Удалить</a></td>
                 </tr>
                 <tr :class="isEdit(human.id) ? '' : 'd-none'">
@@ -51,6 +52,8 @@ export default {
 
     mounted() {
         this.getPeople()
+        this.$parent.parentLog();
+        this.$parent.$refs.create.$refs.somecomponent.indexSomeComponent();
     },
 
     methods: {
@@ -96,6 +99,10 @@ export default {
         isEdit(id) {
             return this.editPersonID === id
         },
+
+        indexLog() {
+            console.log('this is index component');
+        }
 
     },
 
